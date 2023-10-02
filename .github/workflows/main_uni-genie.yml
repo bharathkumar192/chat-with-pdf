@@ -24,7 +24,7 @@ jobs:
       - name: npm install, start dev server
         run: |
           npm install
-          npm run dev
+          npm run build
           
 
       - name: Upload artifact for deployment job
