@@ -243,11 +243,13 @@
     border: 1px solid black;
     align-items: center;
     padding: 0.85rem 0.75rem 0.85rem 0.75rem;
+    display: hidden;
   }
 
   .navlogo {
     font-size: 1.25rem;
     width: 20rem;
+    display: hidden;
   }
 
   .markdownanswer code {
@@ -260,3 +262,25 @@
     text-align: center;
   }
 }
+
+.highlight{
+  font-weight: bold; 
+  font-size: 3em !important;
+}
+
+
+.sample-questions-box {
+  border: 1px solid #e2e8f0;
+  padding: 16px;
+  border-radius: 4px;
+}
+
+.sample-questions-box h2 {
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+
+
+
+

@@ -6,12 +6,14 @@ import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import LoadingDots from '@/components/ui/LoadingDots';
 import { Document } from 'langchain/document';
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+
 
 export default function Home() {
   const [query, setQuery] = useState<string>('');
@@ -25,7 +27,7 @@ export default function Home() {
   }>({
     messages: [
       {
-        message: 'Hi, what would you like to learn about this document?',
+        message: 'Hi, I am UniGenie. I can help you with your queries regarding Study Abroad.',
         type: 'apiMessage',
       },
     ],
@@ -33,13 +35,29 @@ export default function Home() {
   });
 
   const { messages, history } = messageState;
-
+  const questions = [
+    "Suggest me some universities for my profile with cgpa -8 , gre 327 , ielts 7.5 , work experience 24 months for masters in computer science",
+    "Will I get the university of north texas for my profile with cgpa 6, gre 320 , ielts 7 for masters in computer science course ?",
+    "Suggest me some univ which accept gre score of 300",
+    "What is IELTS?",
+    "What is GRE?",
+  ];
   const messageListRef = useRef<HTMLDivElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   textAreaRef.current?.focus();
+  // }, []);
+
+  const handleSampleQuestionClick = (question: string) => {
+    setQuery(question);
+    
+    // Focus the text area
     textAreaRef.current?.focus();
-  }, []);
+
+    // Scroll to the text area
+    textAreaRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   //handle form submission
   async function handleSubmit(e: any) {
@@ -124,9 +142,34 @@ export default function Home() {
     <>
       <Layout>
         <div className="mx-auto flex flex-col gap-4">
-          <h1 className="text-2xl font-bold leading-[1.1] tracking-tighter text-center">
-            Chat With Your Docs
-          </h1>
+        <h4 className="text-3xl font-bold leading-[1.1] tracking-tighter text-center">
+          Chat with <span className="highlight text-5xl"> UniGenie </span>
+        </h4>
+
+        <div className="sample-questions-box bg-gray-200 p-4 rounded">
+        <h2 className="text-xl mb-4">Examples</h2>
+        <Accordion type="single" collapsible className="flex-col">
+          <AccordionItem value="sample-questions">
+            <AccordionTrigger className="cursor-pointer bg-gray-300 p-2 rounded mb-2 hover:bg-gray-400 transition">
+              <h3 className="font-medium">Sample Questions</h3>
+            </AccordionTrigger>
+            <AccordionContent>
+              <ul>
+                {questions.map((question, index) => (
+                  <li key={index}>
+                    <button 
+                      onClick={() => handleSampleQuestionClick(question)}
+                      className="block w-full text-left py-2 px-4 rounded mb-2 hover:bg-gray-400 transition">
+                      {question}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </div>
+
           <main className={styles.main}>
             <div className={styles.cloud}>
               <div ref={messageListRef} className={styles.messagelist}>
@@ -224,7 +267,7 @@ export default function Home() {
                     placeholder={
                       loading
                         ? 'Waiting for response...'
-                        : 'What is this legal case about?'
+                        : 'Enter your Query?'
                     }
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
