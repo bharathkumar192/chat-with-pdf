@@ -113,7 +113,7 @@ export default function Home() {
               sourceDocs: data.sourceDocuments,
             },
           ],
-          history: [],
+          history: [...state.history, [question, data.text]],
         }));
       }
       console.log('messageState', messageState);
