@@ -5,8 +5,7 @@ import { ConversationalRetrievalQAChain } from 'langchain/chains';
 
 export const CONDENSE_TEMPLATE = `Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question.
 
-Chat History:
-{chat_history}
+
 Follow Up Input: {question}
 Standalone question:
 
@@ -19,6 +18,10 @@ Standalone question:
 
 //  Custom Prompt and
 export const QA_TEMPLATE = `
+greet and offer help to the user if the user greets or says hello/hi to you. if the user does not greet you, skip this step.
+check if user wants to chat regarding other parts of the process or wants to know about the process of university shortlist
+recommendation and respond according. if the questions is normal chat, proceed with the comnversation, else if the question is about the process of university recommendation, here is how you should respond:
+
 Now I will explain the process in steps.
 
 STEP 1 : Take details from the user for shorlisting universities according to their profile.
