@@ -3,11 +3,9 @@ import { PineconeStore } from 'langchain/vectorstores/pinecone';
 import { ConversationalRetrievalQAChain } from 'langchain/chains';
 
 
-export const CONDENSE_TEMPLATE = `Given follow up question, rephrase the follow up question to be a standalone question.
-
-
-Follow Up Input Question:- {question}
-Standalone question:-  
+export const CONDENSE_TEMPLATE = `Given follow up question, rephrase the follow up question to be a standalone question. 
+Give the context for this question - {question} 
+{chat history}
 `;
 
 
@@ -122,8 +120,9 @@ Rules: Never explain the process to the user, never explain the backend process,
 .
 
 {context}
+user question- {question}
+chathistory of last two messages - {chat history }
 
-Present User Question:- {question}
 Helpful answer in markdown:`;
 
 
